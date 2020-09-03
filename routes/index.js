@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 
 //Routes
 const router = express.Router();
-router.get('/', homeController.index);
+router.get('/',homeController.userMiddleware, homeController.index);
 router.get('/users/login', userController.login);
 
 module.exports = router;
