@@ -9,5 +9,5 @@ exports.index = (req, res)=>{
         pageTitle: 'Título de teste',
         userInfo: req.userInfo
     };
-    res.render('home', obj);
+    res.render('home');
 };
