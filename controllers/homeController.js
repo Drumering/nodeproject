@@ -1,13 +1,18 @@
+const mongoose = require('mongoose');
+const Post = mongoose.model('Post');
+
 exports.userMiddleware = (req, res, next)=> {
     let info = {name:'Anderson', id:123};
     req.userInfo = info;
     next();
 };
 
-exports.index = (req, res)=>{
-    let obj = {
-        pageTitle: 'Título de teste',
-        userInfo: req.userInfo
+exports.index = async (req, res)=>{
+    let responseJson = {
+        pageTitle: 'HOME'
     };
-    res.render('home');
+
+    const posts = await Post.find();
+    responseJson.posts = posts;
+    res.render('home', responseJson);
 };
