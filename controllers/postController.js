@@ -6,6 +6,7 @@ exports.add = (req, res) => {
 };
 
 exports.addAction = async (req, res) => {
+    req.body.tags = req.body.tags.split(',').map(t => t.trim());
     const post = new Post(req.body);
     try {
         await post.save();
@@ -28,7 +29,7 @@ exports.edit = async (req, res) =>{
 
 exports.editAction = async (req, res) => {
     req.body.slug = require('slug')(req.body.title);
-
+    req.body.tags = req.body.tags.split(',').map(t => t.trim());
     try {
         const post = await Post.findOneAndUpdate(
             { slug: req.params.slug },
@@ -44,4 +45,13 @@ exports.editAction = async (req, res) => {
     }
     req.flash('success', 'Post atualizado com sucesso');
     res.redirect('/');
+};
+
+exports.view = async (req, res) => {
+    const post = await Post.findOne({
+        slug: req.params.slug
+    });
+    res.render('view', {
+        post
+    });
 };

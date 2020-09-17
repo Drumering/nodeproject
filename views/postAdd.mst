@@ -4,25 +4,22 @@
 
 <form method="POST">
     <label>
-        <br/>
         Título:
         <input type="text" name="title" />
     </label>
-
+    <br/>
     <label>
-        <br/>
         Corpo:
         <textarea name="body"></textarea>
     </label>
-
+    <br/>
     <label>
-        <br/>
-        Tags:
+        Tags: <small>(Separar as tags por vírgula)</small>
+        <input type="text" name="tags" />
         
     </label>
-
+    <br/>
     <label>
-        <br/>
         <input type="submit" value="Salvar" />
     </label>
 </form>

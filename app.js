@@ -19,6 +19,9 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+// Make public folder as global
+app.use(express.static(__dirname + '/public'));
+
 // Settings flash messages
 app.use(cookieParser(process.env.SECRET));
 app.use(sesssion({
