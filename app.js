@@ -4,6 +4,8 @@ const mustache = require('mustache-express');
 const cookieParser = require('cookie-parser');
 const sesssion = require('express-session');
 const flash = require('express-flash');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
 
 // Requiring templates
 const router = require('./routes/index');
@@ -37,6 +39,14 @@ app.use((req, res, next)=>{
     res.locals.flashes = req.flash();
     next();
 });
+
+//Settings passport
+app.use(passport.initialize());
+app.use(passport.session());
+const User = require('./models/User');
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Route settings
 app.use('/', router);
